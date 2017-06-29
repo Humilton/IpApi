@@ -5,3 +5,10 @@
 .DS_Store
 /build
 /captures
+/gradle
+/.idea
+/*.bat
+/*.iml
+/*
+/app/app.iml
+/app/lint.xml
