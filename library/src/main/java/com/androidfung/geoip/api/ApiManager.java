@@ -8,9 +8,10 @@ import android.provider.Settings;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.DefaultRetryPolicy;
 import com.androidfung.geoip.model.GeoIpResponseModel;
 import com.androidfung.geoip.network.GsonObjectRequest;
-
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -35,6 +36,15 @@ public class ApiManager {
 
         GsonObjectRequest gsonReq = new GsonObjectRequest(Request.Method.GET, ENDPOINT
                 , GeoIpResponseModel.class, null, listener, errorListener);
+        mRequestQueue.add(gsonReq);
+    }
+
+    public void getGeoIpInfo(int socketTimeout, Response.Listener<GeoIpResponseModel> listener, Response.ErrorListener errorListener){
+
+        GsonObjectRequest gsonReq = new GsonObjectRequest(Request.Method.GET, ENDPOINT
+                , GeoIpResponseModel.class, null, listener, errorListener);
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        gsonReq.setRetryPolicy(policy);
         mRequestQueue.add(gsonReq);
     }
 

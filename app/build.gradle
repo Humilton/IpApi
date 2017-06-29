@@ -9,7 +9,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 3
-        versionName "1.0.0.0528"
+        versionName "1.0.1"
         resConfigs "en"
 //        jackOptions {
 //            enabled = false
